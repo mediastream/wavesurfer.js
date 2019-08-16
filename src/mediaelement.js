@@ -128,11 +128,15 @@ export default class MediaElement extends WebAudio {
     _load(media, peaks) {
         // load must be called manually on iOS, otherwise peaks won't draw
         // until a user interaction triggers load --> 'ready' event
-        if (typeof media.load == 'function') {
+        if (typeof media.load == 'function' && media.readyState === 0) {
             // Resets the media element and restarts the media resource. Any
             // pending events are discarded. How much media data is fetched is
             // still affected by the preload attribute.
             media.load();
+        }
+
+        if (media.readyState >= 3) {
+            this.fireEvent('canplay');
         }
 
         media.addEventListener('error', () => {
