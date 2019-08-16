@@ -136,7 +136,9 @@ export default class MediaElement extends WebAudio {
         }
 
         if (media.readyState >= 3) {
-            this.fireEvent('canplay');
+            setTimeout(() => {
+                this.fireEvent('canplay');
+            }, 0);
         }
 
         media.addEventListener('error', () => {
