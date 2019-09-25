@@ -7,6 +7,7 @@
     "example": "example"
   },
   "files": [
+    "build-config",
     "dist/",
     "src/"
   ],
